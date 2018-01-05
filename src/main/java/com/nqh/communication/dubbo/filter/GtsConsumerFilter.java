@@ -16,11 +16,11 @@ public class GtsConsumerFilter
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException
     {
         Boolean isNeedTransGtsId = false;
-        String gtsId = null;
+        String xid = null;
         try
         {
-            gtsId = TxcContext.getCurrentXid();
-            if (null != gtsId && gtsId.length() > 0)
+            xid = TxcContext.getCurrentXid();
+            if (null != xid && xid.length() > 0)
             {
                 isNeedTransGtsId = true;
             }
@@ -36,8 +36,8 @@ public class GtsConsumerFilter
         }
         else
         {
-            log.debug("gtsId: {}", gtsId);
-            invocation.getAttachments().put("xid", gtsId);
+            log.debug("xid: {}", xid);
+            invocation.getAttachments().put("xid", xid);
             return invoker.invoke(invocation);
         }
     }

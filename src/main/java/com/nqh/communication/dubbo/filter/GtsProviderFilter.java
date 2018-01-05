@@ -18,18 +18,18 @@ public class GtsProviderFilter
 
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException
     {
-        String gtsId = invocation.getAttachment("xid");
-        if (null == gtsId || gtsId.length() == 0)
+        String xid = invocation.getAttachment("xid");
+        if (null == xid || xid.length() == 0)
         {
             return invoker.invoke(invocation);
         }
 
         try
         {
-            log.debug("gtsId: {}", gtsId);
+            log.debug("xid: {}", xid);
             try
             {
-                TxcContext.bind(gtsId, null);
+                TxcContext.bind(xid, null); //注意在这里就设置了xid
             }
             catch (Throwable e)
             {

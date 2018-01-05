@@ -15,5 +15,6 @@ public class StockService {
     @TxcTransaction
     public void addStock(StockParam param){
 
+        //这里执行具体的 dml，操作库存相关表
     }
 }
